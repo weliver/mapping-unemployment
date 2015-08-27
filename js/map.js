@@ -36,11 +36,10 @@ var key = {
   width: settings.width*.25,
   height: 30,
 };
-//Key: Declar SVG with g group for boxes and text labels
 
 //interpolate the red and blue colors to build our scale
 var blue = d3.interpolate({color: "#2062FA"}, {color: "white"});
-var red = d3.interpolate({color: "#FA5555"}, {color: "white"});
+var red = d3.interpolate({color: "#E14C4C"}, {color: "white"});
 //Scale the geo-data to fit within our dimensions
 var projection = d3.geo.albersUsa()
     .scale(1000)
@@ -116,7 +115,7 @@ function drawMap(year) {
 
   function colorSet(rate){
     if (rate <= 5.5) {
-      var x = rate/8;
+      var x = rate/6;
       var y = blue(x);
     } else {
       var x = 11/rate -1;
