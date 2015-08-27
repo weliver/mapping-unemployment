@@ -56,11 +56,7 @@ var tooltip = d3.select("body")
     .style("z-index", "10")
     .style("visibility", "hidden");
 
-<<<<<<< HEAD
 d3.json("data/states.json", function(error, us, cb) {
-=======
-d3.json("./data/states.json", function(error, us, cb) {
->>>>>>> master
   if (error) return console.error(error);
   map.svg.selectAll(".subunit")
     .data(topojson.feature(us, us.objects.states).features)
@@ -72,11 +68,7 @@ d3.json("./data/states.json", function(error, us, cb) {
 
 
 function drawMap(year) {
-<<<<<<< HEAD
   d3.json("data/unemployment.json", function(error, d) {
-=======
-  d3.json("./data/unemployment.json", function(error, d) {
->>>>>>> master
     if (error) return console.error(error);
     d3.values(d).map(function(num) { 
       if ((num.year == year) && (num.period == settings.period)) {
@@ -136,11 +128,7 @@ function drawMap(year) {
 //test function to average year values
 function yearAvg() {
 var yearD = [];
-<<<<<<< HEAD
   d3.json("data/unemployment.json", function(error, d) {
-=======
-  d3.json("./data/unemployment.json", function(error, d) {
->>>>>>> master
     if (error) return console.error(error);
      
     d3.values(d).map(function(num){
