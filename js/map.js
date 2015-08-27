@@ -38,7 +38,7 @@ var key = {
 };
 
 //interpolate the red and blue colors to build our scale
-var blue = d3.interpolate({color: "#2062FA"}, {color: "white"});
+var blue = d3.interpolate({color: "#11368C"}, {color: "white"});
 var red = d3.interpolate({color: "#E14C4C"}, {color: "white"});
 //Scale the geo-data to fit within our dimensions
 var projection = d3.geo.albersUsa()
