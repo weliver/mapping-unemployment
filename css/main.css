@@ -1,0 +1,155 @@
+
+body {
+    font-family: 'Lora', serif;
+}
+a {
+    text-decoration: none;
+}
+span {
+    font-weight: bolder;
+}
+h1 {
+    margin-bottom: 10px;
+}
+.head {
+    font-family: 'Lato', sans-serif;
+    font-size: .75em;
+    font-weight: 400;
+}
+.head.name {
+    font-size: .9em;
+}
+.head.date {
+    font-style: italic;
+}
+.header p{
+    margin: 5px 0px;
+}
+.container {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.map {
+    
+}
+
+.key {
+    color: black;
+    
+}
+
+.tooltip {
+    background: white;
+    border: 1px solid #efefef;
+    padding: 5px;
+    box-shadow: 2px 2px 2px #888888;
+}
+
+.land {
+	fill: white;
+}
+.state-boundary {
+	fill: white;
+	stroke: white;
+}
+.subunit {
+	fill: white;
+	stroke: #383838;
+    stroke-width: .25;
+}
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+    margin-bottom: 10px;
+    
+    /*required for proper track sizing in FF*/
+    width: 100%;
+}
+
+/*Input styling inspired from Brenna OBrien.
+Blog: http://brennaobrien.com/blog/2014/05/style-input-type-range-in-every-browser.html
+*/
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+    margin-top: -5px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+    width: 300px;
+    height: 5px;
+    
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+    
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}

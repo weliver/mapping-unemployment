@@ -1,0 +1,28 @@
+{
+  "name": "Unemployment Map - d3",
+  "version": "0.0.1",
+  "homepage": "https://github.com/weliver/us-unemployment",
+  "authors": [
+    "Jamie Weliver @jamieweliver"
+  ],
+  "description": "An interactive map built with d3 using historic unemployment data provided by the Department of Labor",
+  "main": "index.html",
+  "dependencies": {
+    "d3": "~3.5.6",
+    "topojson": "~1.6.19",
+    "jquery": "~1.10"
+  },
+  "keywords": [
+    "d3",
+    "geoJSON",
+    "jquery"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
