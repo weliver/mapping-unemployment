@@ -66,37 +66,8 @@ d3.json("data/states.json", function(error, us, cb) {
 });
 
 
-// function drawMap(year) {
-//   d3.json("data/unemployment.json", function(error, d) {
-//     if (error) return console.error(error);
-//     d3.values(d).map(function(num) { 
-//       if ((num.year == year) && (num.period == settings.period)) {
-//         var state = {};
-//         state.ID = "s"+num.state_id;
-//         state.state = num.state_name;
-//         state.val = num.value;
-//         state.label = num.label;
-//         fillData(state);
-//       }
-//     });
-//   });
 function drawMap(year) {
 yearAvg(year);
-  // d3.json("data/unemployment.json", function(error, d) {
-  //   if (error) return console.error(error);
-
-
-  //   d3.values(d).map(function(num) { 
-  //     if ((num.year == year) && (num.period == settings.period)) {
-  //       var state = {};
-  //       state.ID = "s"+num.state_id;
-  //       state.state = num.state_name;
-  //       state.val = num.value;
-  //       state.label = num.label;
-  //       fillData(state);
-  //     }
-  //   });
-  // });
 
 //Sort through data by year, return average of monthly rates for annual rate
 function yearAvg(year) {
