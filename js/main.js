@@ -3,13 +3,11 @@ $(document).ready(function() {
   year = $('#year').val();
   drawMap(year);
   $('#data-year').text(year);
-  $('#year').on('input change', function() {
+  $('#year').on('input', function() {
     year = $(this).val();
     $('#data-year').text(year);
     drawMap($(this).val());
   })
-  function changeYear(x) {
-    drawMap(x);
-  }
+
 });
 

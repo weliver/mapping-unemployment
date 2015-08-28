@@ -66,34 +66,92 @@ d3.json("data/states.json", function(error, us, cb) {
 });
 
 
+// function drawMap(year) {
+//   d3.json("data/unemployment.json", function(error, d) {
+//     if (error) return console.error(error);
+//     d3.values(d).map(function(num) { 
+//       if ((num.year == year) && (num.period == settings.period)) {
+//         var state = {};
+//         state.ID = "s"+num.state_id;
+//         state.state = num.state_name;
+//         state.val = num.value;
+//         state.label = num.label;
+//         fillData(state);
+//       }
+//     });
+//   });
 function drawMap(year) {
-  d3.json("data/unemployment.json", function(error, d) {
-    if (error) return console.error(error);
-    d3.values(d).map(function(num) { 
-      if ((num.year == year) && (num.period == settings.period)) {
-        var state = {};
-        state.ID = "s"+num.state_id;
-        state.state = num.state_name;
-        state.val = num.value;
-        state.label = num.label;
-        fillData(state);
+yearAvg(year);
+  // d3.json("data/unemployment.json", function(error, d) {
+  //   if (error) return console.error(error);
+
+
+  //   d3.values(d).map(function(num) { 
+  //     if ((num.year == year) && (num.period == settings.period)) {
+  //       var state = {};
+  //       state.ID = "s"+num.state_id;
+  //       state.state = num.state_name;
+  //       state.val = num.value;
+  //       state.label = num.label;
+  //       fillData(state);
+  //     }
+  //   });
+  // });
+
+//Sort through data by year, return average of monthly rates for annual rate
+function yearAvg(year) {
+  var curYear = year;
+  var yearD = [];
+    d3.json("data/unemployment.json", function(error, d) {
+      if (error) return console.error(error);
+       
+      d3.values(d).map(function(num){
+        sortStates(num.state_name, num.state_id, num.year, num.value);
+      });
+      
+      function sortStates(state,id, year, val, cb) {
+        var curVal = yearD[yearD.length - 1];
+        if (curVal && (curVal.state == state) && (curVal.year == year)){
+          curVal.rates.push(val);
+        } else {
+          var newObj = {};
+          newObj.state = state;
+          newObj.ID = "s"+id;
+          newObj.year = year;
+          newObj.rates = [];
+          newObj.rates.push(val);
+          yearD.push(newObj);
+        }
+           
+      if (curVal && (curVal.rates.length == 12) && (curVal.year == curYear))  {
+
+          var i;
+          var sum=0;
+          for (i=0; i <curVal.rates.length; i++){
+            sum += curVal.rates[i];
+            curVal.avg = (sum/curVal.rates.length).toFixed(2);
+          }
+          fillData(curVal);
+        }
       }
     });
-  });
-
+    return yearD;
+  }
+  //load up data and fill in states
   function fillData(state) {
-    var tooltipTxt = '<strong>'+state.state+'</strong>'+': '+state.val+'%';
+
+    var tooltipTxt = '<strong>'+state.state+'</strong>'+': '+state.avg+'%';
     map.svg.select('#'+state.ID)
       .on("mouseover", function(d){return tooltip.style("visibility", "visible").html(function(d){return tooltipTxt;});})
       .on("mousemove", function(){return tooltip.style("top",
       (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
       .on("mouseout", function(){return tooltip.style("visibility", "hidden");})
       .transition()
-      .style('fill', colorSet(state.val))
+      .style('fill', colorSet(state.avg))
       .duration(200);        
   }
-  
-  
+
+//draw the key color boxes in the bottom right  
   key.group.selectAll('rect')
     .data(key.data)
     .enter()
@@ -103,7 +161,7 @@ function drawMap(year) {
     .attr('width', '30')
     .attr('height', '30')
     .style('fill', function(d) { return colorSet(d.val);});
-
+//draw the text inside the key boxes in the bottom right
   key.group.selectAll('text')
     .data(key.data)
     .enter().append('text')
@@ -112,6 +170,7 @@ function drawMap(year) {
     .style('color', 'black')
     .text(function(d) {return d.val});
 
+//used to set the color based on the rate
   function colorSet(rate){
     if (rate <= 5.5) {
       var x = rate/6;
@@ -124,39 +183,5 @@ function drawMap(year) {
   }
 }
 
-//test function to average year values
-function yearAvg() {
-var yearD = [];
-  d3.json("data/unemployment.json", function(error, d) {
-    if (error) return console.error(error);
-     
-    d3.values(d).map(function(num){
-      sortStates(num.state_id, num.year, num.value);
-    });
-    
-    function sortStates(state, year, val, cb) {
-      var curVal = yearD[yearD.length - 1];
-      if (curVal && (curVal.state == state) && (curVal.year == year)){
-        curVal.rates.push(val);
-      } else {
-        var newObj = {};
-        newObj.state = state;
-        newObj.year = year;
-        newObj.rates = [];
-        newObj.rates.push(val);
-        yearD.push(newObj);
-      }
-         
-      if (curVal && curVal.rates.length == 12) {
-        var i;
-        var sum=0;
-        for (i=0; i <curVal.rates.length; i++){
-          sum += curVal.rates[i];
-          curVal.avg = sum/curVal.rates.length;
-        }
-      }
-    }
-  });
-  return {data:yearD};
-}
+
 
