@@ -3,7 +3,6 @@
 var settings = {
   width: 800,
   height: 500,
-  year: 1976,
   period: "M07"
 }
 

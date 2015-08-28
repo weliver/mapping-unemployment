@@ -1,25 +1,15 @@
 $(document).ready(function() {
+  $('#year').focus();
   year = $('#year').val();
   drawMap(year);
   $('#data-year').text(year);
-  $(document).keydown(function(e){
-  	var key = event.which;
-  	if ((event.which === 37) && (year >1975)) {
-  		year--;
-  		$('#year').val(year);
-	    changeYear();
-  	} else if ((event.which === 39) && (year < 2013)){
-  		year++;
-  		$('#year').val(year);
-    	changeYear();
-  	}
-  });
-  $('#year').on('change', function(e){
-  	year = $(this).val();
-    changeYear();
-  });
-  function changeYear(el) {
-    drawMap(year);
+  $('#year').on('input change', function() {
+    year = $(this).val();
     $('#data-year').text(year);
+    drawMap($(this).val());
+  })
+  function changeYear(x) {
+    drawMap(x);
   }
 });
+
