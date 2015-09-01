@@ -1,12 +1,12 @@
 $(document).ready(function() {
   $('#year').focus();
-  year = $('#year').val();
-  drawMap(year);
-  $('#data-year').text(year);
+  d3Map.year = $('#year').val();
+  d3Map.drawMap(d3Map.year);
+  $('#data-year').text(d3Map.year);
   $('#year').on('input', function() {
-    year = $(this).val();
-    $('#data-year').text(year);
-    drawMap($(this).val());
+    d3Map.year = $(this).val();
+    $('#data-year').text(d3Map.year);
+    d3Map.drawMap($(this).val());
   })
 
 });
